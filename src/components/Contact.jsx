@@ -9,7 +9,7 @@ const Contact = () => {
     msg: ''
   });
   
-  // 'idle' | 'error' | 'success'
+  // 'idle' | 'submitting' | 'error' | 'success'
   const [formState, setFormState] = useState('idle');
 
   const budgetOptions = [
@@ -29,19 +29,52 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form action if any
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     if (!formData.name.trim() || !formData.email.trim() || !formData.msg.trim()) {
       setFormState('error');
-      setTimeout(() => {
-        setFormState('idle');
-      }, 2000);
+      setTimeout(() => setFormState('idle'), 2000);
       return;
     }
 
-    // Success
-    setFormState('success');
+    setFormState('submitting');
+
+    try {
+      // Create the payload for Web3Forms
+      const payload = {
+        access_key: "0ab1ccf7-b040-4220-be56-95f6e6f19200",
+        name: formData.name,
+        email: formData.email,
+        message: `Budget: ${activeBudget || 'Not specified'}\nType: ${formData.type || 'Not specified'}\n\nMessage:\n${formData.msg}`,
+        subject: "New Inquiry from Portfolio Website"
+      };
+
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const json = await res.json();
+
+      if (json.success) {
+        setFormState('success');
+        setFormData({ name: '', email: '', type: '', msg: '' });
+        setActiveBudget(null);
+        setTimeout(() => setFormState('idle'), 4000);
+      } else {
+        setFormState('error');
+        setTimeout(() => setFormState('idle'), 3000);
+      }
+    } catch (err) {
+      console.error("Submission Error: ", err);
+      setFormState('error');
+      setTimeout(() => setFormState('idle'), 3000);
+    }
   };
 
   return (
@@ -164,22 +197,29 @@ const Contact = () => {
                   </div>
 
                   <button 
-                    className="btn-submit" 
-                    onClick={handleSubmit}
-                    style={formState === 'error' ? { background: 'linear-gradient(135deg,#ef4444,#dc2626)' } : {}}
-                  >
-                    {formState === 'error' ? (
-                      'Please fill in required fields'
-                    ) : (
-                      <>
-                        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                          <line x1="22" y1="2" x2="11" y2="13"/>
-                          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                        </svg>
-                        Send Message
-                      </>
-                    )}
-                  </button>
+                  type="submit" 
+                  className={`btn-submit ${formState}`}
+                  disabled={formState === 'submitting'}
+                  onClick={handleSubmit}
+                >
+                  <span className="btn-text">
+                    {formState === 'idle' && 'Send Message'}
+                    {formState === 'submitting' && 'Sending...'}
+                    {formState === 'success' && 'Message Sent!'}
+                    {formState === 'error' && 'Error - Try Again'}
+                  </span>
+                  {formState === 'idle' && (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="22" y1="2" x2="11" y2="13"></line>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                  )}
+                  {formState === 'success' && (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  )}
+                </button>
                 </div>
               </>
             )}
