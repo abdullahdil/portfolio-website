@@ -22,7 +22,7 @@ const Hero = () => {
         <p className="hero-tagline">
           I build <strong>intelligent automation systems</strong> that eliminate manual work, 
           integrate AI into your workflows, and let your business 
-          <strong>scale without adding headcount.</strong>
+          <strong> scale without adding headcount.</strong>
         </p>
 
         <div className="hero-actions">
