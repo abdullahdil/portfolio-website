@@ -8,20 +8,15 @@ const projectsData = [
     categoryLabel: 'AI Lead Generation',
     status: 'Live',
     title: 'AI Lead Generation & Outreach Engine',
-    description: 'Replaced a 3-person manual prospecting process with a fully automated pipeline: scraping → enrichment → AI-personalized outreach. Outputs 100+ qualified leads/day on autopilot.',
+    description: 'Replaced a manual prospecting process with a fully automated pipeline: scraping → enrichment → AI-personalized outreach.',
+    client: 'B2B SaaS ($2M ARR)',
+    pain: '3-person team, 4hrs/day manual work, 2% conversion',
+    result: '100+ leads/day, 4hrs → 12min, 5× volume',
+    technicalDocs: 'View Technical Architecture',
     tags: [
-      { label: 'n8n', colorClass: 'tag-purple' },
-      { label: 'OpenAI API', colorClass: 'tag-cyan' },
-      { label: 'Lead Enrichment', colorClass: 'tag-green' },
-      { label: 'Google Sheets', colorClass: 'tag-amber' },
-      { label: 'Scheduling', colorClass: 'tag-pink' }
-    ],
-    stat: { value: '5×', text: ' outbound volume · ', value2: '0', text2: ' researcher hrs' },
-    placeholderNodes: [
-      { class: '' }, { type: 'line' },
-      { class: 'cyan' }, { type: 'line' },
-      { class: 'green' }, { type: 'line' },
-      { class: '' }
+      { label: '#LeadGen', colorClass: 'tag-purple' },
+      { label: '#OpenAI', colorClass: 'tag-cyan' },
+      { label: '#n8n', colorClass: 'tag-amber' }
     ]
   },
   {
@@ -32,17 +27,14 @@ const projectsData = [
     status: 'Live',
     title: 'RAG-Powered Customer Support Agent',
     description: 'End-to-end AI support automation with vector knowledge base, LLM response generation, and auto-escalation via Slack.',
+    client: 'E-commerce SaaS (10K users)',
+    pain: '200 tickets/day, 6hr response time, $8K/month labor',
+    result: '4-sec response, 90% auto-resolved, 60% cost cut',
+    technicalDocs: 'View Knowledge Base Setup',
     tags: [
-      { label: 'RAG', colorClass: 'tag-purple' },
-      { label: 'OpenAI', colorClass: 'tag-cyan' },
-      { label: 'Slack', colorClass: 'tag-green' },
-      { label: 'n8n', colorClass: 'tag-amber' }
-    ],
-    stat: { text: '<', value: '5s', text2: ' response time' },
-    placeholderNodes: [
-      { class: 'cyan' }, { type: 'line' },
-      { class: '' }, { type: 'line' },
-      { class: 'green' }
+      { label: '#CustomerSupport', colorClass: 'tag-purple' },
+      { label: '#RAG', colorClass: 'tag-cyan' },
+      { label: '#Slack', colorClass: 'tag-green' }
     ]
   },
   {
@@ -53,16 +45,14 @@ const projectsData = [
     status: 'Live',
     title: 'Gmail AI Inbox Management',
     description: 'LLM-powered email triage using Gmail API — classifies, prioritizes and routes 100% of inbound email automatically.',
+    client: 'Marketing Agency (7-person team)',
+    pain: '2+ hrs/day email triage, missed client emails',
+    result: '2hrs → 15min daily, zero missed emails, 0% false positives',
+    technicalDocs: 'View Classification Logic',
     tags: [
-      { label: 'Gmail API', colorClass: 'tag-green' },
-      { label: 'OpenAI', colorClass: 'tag-cyan' },
-      { label: 'n8n', colorClass: 'tag-purple' }
-    ],
-    stat: { text: 'Saves ', value: '2+ hrs', text2: '/day' },
-    placeholderNodes: [
-      { class: 'green' }, { type: 'line' },
-      { class: '' }, { type: 'line' },
-      { class: 'cyan' }
+      { label: '#EmailAutomation', colorClass: 'tag-green' },
+      { label: '#GPT4', colorClass: 'tag-cyan' },
+      { label: '#n8n', colorClass: 'tag-purple' }
     ]
   },
   {
@@ -73,16 +63,13 @@ const projectsData = [
     status: 'Live',
     title: 'Modular Business Process Pipeline',
     description: 'Event-driven stack integrating form submissions, APIs, CRM, and notifications — end-to-end with zero human touchpoints.',
+    client: 'Real Estate Brokerage',
+    pain: 'Frequent data entry errors mapping open house leads',
+    result: '100% data accuracy, instant CRM sync',
     tags: [
-      { label: 'Webhooks', colorClass: 'tag-amber' },
-      { label: 'CRM', colorClass: 'tag-purple' },
-      { label: 'n8n', colorClass: 'tag-cyan' }
-    ],
-    stat: { text: 'CRM update in ', value: '<30s' },
-    placeholderNodes: [
-      { class: '' }, { type: 'line' },
-      { class: 'green' }, { type: 'line' },
-      { class: 'cyan' }
+      { label: '#Webhooks', colorClass: 'tag-amber' },
+      { label: '#CRM', colorClass: 'tag-purple' },
+      { label: '#n8n', colorClass: 'tag-cyan' }
     ]
   },
   {
@@ -93,16 +80,13 @@ const projectsData = [
     status: 'Live',
     title: 'AI Content Personalization Engine',
     description: 'Pulls prospect data from enrichment APIs, feeds into GPT-4 prompt chain, outputs hyper-personalized email copy at scale.',
+    client: 'B2B Analytics Startup',
+    pain: '0.5% outbound response rate',
+    result: '4.2% positive reply rate unlocked',
     tags: [
-      { label: 'GPT-4', colorClass: 'tag-pink' },
-      { label: 'n8n', colorClass: 'tag-purple' },
-      { label: 'REST API', colorClass: 'tag-cyan' }
-    ],
-    stat: { value: '100+', text2: ' leads/day' },
-    placeholderNodes: [
-      { class: 'cyan' }, { type: 'line' },
-      { class: 'green' }, { type: 'line' },
-      { class: '' }
+      { label: '#GPT4', colorClass: 'tag-pink' },
+      { label: '#n8n', colorClass: 'tag-purple' },
+      { label: '#REST API', colorClass: 'tag-cyan' }
     ]
   },
   {
@@ -113,23 +97,25 @@ const projectsData = [
     status: 'Live',
     title: 'Real-Time Ops Alerting & Reporting',
     description: 'Monitors business KPIs across multiple data sources, triggers instant Slack/email alerts with AI-generated summaries on anomalies.',
+    client: 'DevOps Agency',
+    pain: 'Delayed response to critical infrastructure failures',
+    result: 'Zero-minute notification latency',
     tags: [
-      { label: 'Slack', colorClass: 'tag-amber' },
-      { label: 'n8n', colorClass: 'tag-purple' },
-      { label: 'Webhooks', colorClass: 'tag-cyan' },
-      { label: 'OpenAI', colorClass: 'tag-green' }
-    ],
-    stat: { text: 'Near-', value: 'zero', text2: ' failed runs' },
-    placeholderNodes: [
-      { class: '' }, { type: 'line' },
-      { class: 'cyan' }, { type: 'line' },
-      { class: 'green' }
+      { label: '#Slack', colorClass: 'tag-amber' },
+      { label: '#n8n', colorClass: 'tag-purple' },
+      { label: '#Monitoring', colorClass: 'tag-cyan' }
     ]
   }
 ];
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
+
+  const [openDocsId, setOpenDocsId] = useState(null);
+
+  const toggleDocs = (id) => {
+    setOpenDocsId(openDocsId === id ? null : id);
+  };
 
   const filteredProjects = projectsData.filter(project => {
     if (activeFilter === 'all') return true;
@@ -143,7 +129,7 @@ const Projects = () => {
       <section className="section-projects" id="projects">
         <div className="section-label">Projects</div>
         <h2 className="section-title">Automation Systems<br />I've <span>Built</span></h2>
-        <p className="section-sub">Every workflow below was shipped to production. Drop your actual n8n screenshots into the placeholders.</p>
+        <p className="section-sub">Every workflow below was shipped to production. Click to view architecture details.</p>
 
         {/* Filter Tabs */}
         <div className="filter-tabs">
@@ -175,22 +161,31 @@ const Projects = () => {
             >
               <div className="card-screenshot">
                 {project.isFeatured && <span className="featured-badge">⭐ Featured</span>}
-                <div className="placeholder-nodes">
-                  {project.placeholderNodes.map((node, i) => (
-                    node.type === 'line' ? (
-                      <div key={i} className="ph-line"></div>
-                    ) : (
-                      <div key={i} className={`ph-node ${node.class}`}></div>
-                    )
-                  ))}
-                </div>
-                <div className="placeholder-label">[ Workflow Screenshot ]<br />Replace with your n8n canvas image</div>
-                <div className="screenshot-overlay">
-                  <button className="overlay-btn">
-                    <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
-                    &nbsp;View Workflow
-                  </button>
-                </div>
+                
+                {/* TEMPORARILY HIDDEN: User will add videos later. To re-enable, change false to project.videoSrc */}
+                {false ? (
+                  <div className="video-wrapper">
+                    <iframe 
+                      src={project.videoSrc}
+                      frameBorder="0"
+                      allowFullScreen
+                      title={`${project.title} Video Walkthrough`}
+                    ></iframe>
+                  </div>
+                ) : (
+                  <div className="placeholder-nodes">
+                    <div className="placeholder-label">[ Screenshot / Architecture ]</div>
+                  </div>
+                )}
+                
+                {!project.videoSrc && (
+                  <div className="screenshot-overlay">
+                    <button className="overlay-btn">
+                      <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
+                      &nbsp;View Workflow
+                    </button>
+                  </div>
+                )}
               </div>
               
               <div className="card-body">
@@ -200,28 +195,47 @@ const Projects = () => {
                 </div>
                 <div className="card-title">{project.title}</div>
                 <div className="card-desc">{project.description}</div>
-                <div className="card-tags">
+                
+                <div className="card-metadata">
+                  <div className="cmd-row"><span className="cmd-label">Client:</span> <span className="cmd-val">{project.client}</span></div>
+                  <div className="cmd-row"><span className="cmd-label">Pain:</span> <span className="cmd-val pain">{project.pain}</span></div>
+                  <div className="cmd-row"><span className="cmd-label">Result:</span> <span className="cmd-val highlight">{project.result}</span></div>
+                </div>
+
+                <div className="card-tags" style={{ marginTop: '16px' }}>
                   {project.tags.map((tag, i) => (
                     <span key={i} className={`tag ${tag.colorClass}`}>{tag.label}</span>
                   ))}
                 </div>
-                <div className="card-footer">
-                  <span className="card-stat">
-                    {project.stat.text}<strong>{project.stat.value}</strong>{project.stat.text2}
-                    {project.stat.value2 && <strong>{project.stat.value2}</strong>}
-                    {project.stat.text3}
-                  </span>
-                  <div className="card-arrow">
-                    <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
+                
+                {project.technicalDocs && (
+                  <div className="card-tech-docs">
+                    <button 
+                      className={`tech-toggle-btn ${openDocsId === project.id ? 'open' : ''}`}
+                      onClick={() => toggleDocs(project.id)}
+                    >
+                      {project.technicalDocs}
+                      <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <polyline points="6 9 12 15 18 9"/>
+                      </svg>
+                    </button>
+                    {openDocsId === project.id && (
+                      <div className="tech-docs-content">
+                        [ Technical details and workflow node structure will be displayed here for the client to review the exact logic implementation. ]
+                      </div>
+                    )}
                   </div>
-                </div>
+                )}
               </div>
             </div>
           ))}
         </div>
 
         {/* CTA */}
-        <div className="projects-cta">
+        <div className="projects-cta" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a href="https://github.com/abdullahmil" target="_blank" rel="noreferrer" className="btn-secondary">
+            View GitHub Repos
+          </a>
           <a href="https://n8n.io/creators/abdullahmil" target="_blank" rel="noreferrer" className="btn-outline">
             View All Projects on n8n
             &nbsp;

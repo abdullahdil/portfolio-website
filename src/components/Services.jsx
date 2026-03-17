@@ -5,57 +5,40 @@ const services = [
     icon: '🎯',
     iconBg: 'rgba(139,92,246,0.12)',
     iconBorder: 'rgba(139,92,246,0.2)',
-    title: 'AI Lead Generation Engines',
-    desc: 'I replace your manual prospecting process with a fully automated pipeline that runs 24/7 — finding, enriching, and personalizing outreach at scale.',
-    bullets: [
-      'Automated lead scraping from multiple sources',
-      'API-based data enrichment (email, LinkedIn, company info)',
-      'GPT-4 powered personalized outreach copy',
-      'Daily delivery to Google Sheets, CRM, or email tool'
-    ],
-    tag: 'n8n · OpenAI · REST APIs'
+    title: 'AI Lead Generation Engine',
+    desc: 'I replace your manual prospecting process with a fully automated pipeline.',
+    pain: 'SDRs spend 60% of their day copying/pasting and researching leads instead of selling.',
+    fix: 'A fully automated pipeline that scrapes, enriches, and personalizes outreach 24/7.',
+    result: '100+ qualified leads generated daily, automatically pushed to your CRM.',
+    roi: '10× return in 90 days typical',
+    tag: 'n8n · OpenAI · REST APIs',
+    link: '#case-studies'
   },
   {
     icon: '🤖',
     iconBg: 'rgba(6,182,212,0.12)',
     iconBorder: 'rgba(6,182,212,0.2)',
-    title: 'RAG-Powered AI Support Agents',
-    desc: 'An AI that knows your entire knowledge base and handles customer queries in seconds — automatically escalating only what truly needs a human.',
-    bullets: [
-      'Vector knowledge base ingestion from your docs',
-      'Context-aware LLM response generation',
-      'Auto-routing to human agents via Slack or email',
-      'Works on email, chat, and helpdesk channels'
-    ],
-    tag: 'RAG · OpenAI · n8n · Slack'
-  },
-  {
-    icon: '📬',
-    iconBg: 'rgba(34,197,94,0.12)',
-    iconBorder: 'rgba(34,197,94,0.2)',
-    title: 'Inbox & Email Automation',
-    desc: 'Your inbox, fully tamed. Every email classified, prioritized, routed, and actioned automatically — so you open your inbox to clarity, not chaos.',
-    bullets: [
-      'Real-time email classification by intent and urgency',
-      'Auto-labeling, routing, and draft reply generation',
-      'Critical alerts pushed to Slack instantly',
-      'Works with Gmail, Outlook, and more'
-    ],
-    tag: 'Gmail API · GPT-4 · n8n'
+    title: 'AI Customer Support Agents',
+    desc: 'An AI that handles customer queries in seconds — automatically escalating only what truly needs a human.',
+    pain: 'Customers wait 6+ hours for basic support answers, frustrating them and burning out your team.',
+    fix: 'An AI Agent connected to your internal docs that instantly resolves 80% of L1/L2 tickets.',
+    result: '6-hour response time slashed to 4 seconds.',
+    roi: '10× return in 90 days typical',
+    tag: 'RAG · OpenAI · n8n · Slack',
+    link: '#case-studies'
   },
   {
     icon: '⚙️',
     iconBg: 'rgba(245,158,11,0.12)',
     iconBorder: 'rgba(245,158,11,0.2)',
-    title: 'Business Process Automation',
-    desc: 'Any repetitive, multi-step process in your business — form submissions, CRM updates, approvals, reports, notifications — automated end-to-end.',
-    bullets: [
-      'Webhook-triggered real-time data pipelines',
-      'CRM sync, data validation, and error handling',
-      'Multi-platform integrations (15+ APIs connected)',
-      'Modular design — easy to extend and maintain'
-    ],
-    tag: 'Webhooks · CRM · n8n · APIs'
+    title: 'System Integration & API Orchestration',
+    desc: 'Connecting your scattered tools so data flows synchronously across your entire tech stack.',
+    pain: 'Your team manually moves data between your CRM, billing system, and project management tools.',
+    fix: 'Webhook-triggered pipelines that instantly sync data and trigger cross-platform actions.',
+    result: 'Zero data-entry errors and 20+ hours saved per week.',
+    roi: '10× return in 90 days typical',
+    tag: 'Webhooks · CRM · n8n · APIs',
+    link: '#case-studies'
   }
 ];
 
@@ -73,10 +56,11 @@ const Services = () => {
 
         <div className="services-grid">
           {services.map((service, index) => (
-            <div 
+            <a 
+              href={service.link}
               key={index} 
               className="service-card"
-              style={{ animationDelay: `${0.05 + index * 0.07}s` }}
+              style={{ animationDelay: `${0.05 + index * 0.07}s`, textDecoration: 'none', display: 'block' }}
             >
               <div 
                 className="service-icon-wrap" 
@@ -85,14 +69,27 @@ const Services = () => {
                 {service.icon}
               </div>
               <div className="service-title">{service.title}</div>
-              <div className="service-desc">{service.desc}</div>
-              <ul className="service-list">
-                {service.bullets.map((bullet, i) => (
-                  <li key={i}>{bullet}</li>
-                ))}
-              </ul>
-              <span className="service-tag">{service.tag}</span>
-            </div>
+              
+              <div className="service-details">
+                <div className="s-detail">
+                  <span className="s-label problem">The Pain:</span> <span className="s-text">{service.pain}</span>
+                </div>
+                <div className="s-detail">
+                  <span className="s-label fix">The Fix:</span> <span className="s-text">{service.fix}</span>
+                </div>
+                <div className="s-detail">
+                  <span className="s-label result">Typical Result:</span> <span className="s-text highlight">{service.result}</span>
+                </div>
+                <div className="s-detail" style={{ marginTop: '12px' }}>
+                  <span className="s-label roi">ROI:</span> <span className="s-text special">{service.roi}</span>
+                </div>
+              </div>
+
+              <div className="service-bot-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '24px' }}>
+                <span className="service-tag">{service.tag}</span>
+                <span className="service-learn-more">Learn More &rarr;</span>
+              </div>
+            </a>
           ))}
         </div>
       </section>

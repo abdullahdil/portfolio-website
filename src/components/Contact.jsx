@@ -5,12 +5,13 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    type: '',
+    company: '',
+    waster: '',
     msg: ''
   });
   
-  // 'idle' | 'submitting' | 'error' | 'success'
   const [formState, setFormState] = useState('idle');
+  const [emailCopied, setEmailCopied] = useState(false);
 
   const budgetOptions = [
     'Under $500', 
@@ -24,15 +25,21 @@ const Contact = () => {
     const { id, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      // Map element IDs to state keys
-      [id === 'f-name' ? 'name' : id === 'f-email' ? 'email' : id === 'f-type' ? 'type' : 'msg']: value
+      [id === 'f-name' ? 'name' : id === 'f-email' ? 'email' : id === 'f-company' ? 'company' : id === 'f-waster' ? 'waster' : 'msg']: value
     }));
+  };
+
+  const copyEmail = (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText('abdullahdilshad111@gmail.com');
+    setEmailCopied(true);
+    setTimeout(() => setEmailCopied(false), 2000);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.name.trim() || !formData.email.trim() || !formData.msg.trim()) {
+    if (!formData.name.trim() || !formData.email.trim()) {
       setFormState('error');
       setTimeout(() => setFormState('idle'), 2000);
       return;
@@ -41,13 +48,12 @@ const Contact = () => {
     setFormState('submitting');
 
     try {
-      // Create the payload for Web3Forms
       const payload = {
         access_key: "692ed1c9-f592-49a4-920c-af70e8ee4c9b",
         name: formData.name,
         email: formData.email,
-        message: `Budget: ${activeBudget || 'Not specified'}\nType: ${formData.type || 'Not specified'}\n\nMessage:\n${formData.msg}`,
-        subject: "New Inquiry from Portfolio Website"
+        message: `Company: ${formData.company || 'Not specified'}\nBudget: ${activeBudget || 'Not specified'}\nBiggest Time-Waster: ${formData.waster || 'Not specified'}\n\nMessage:\n${formData.msg}`,
+        subject: "New Audit Request from Portfolio Website"
       };
 
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -63,9 +69,8 @@ const Contact = () => {
 
       if (json.success) {
         setFormState('success');
-        setFormData({ name: '', email: '', type: '', msg: '' });
+        setFormData({ name: '', email: '', company: '', waster: '', msg: '' });
         setActiveBudget(null);
-        setTimeout(() => setFormState('idle'), 4000);
       } else {
         setFormState('error');
         setTimeout(() => setFormState('idle'), 3000);
@@ -82,64 +87,49 @@ const Contact = () => {
       <div className="section-divider"></div>
 
       <section className="section-contact" id="contact">
-        <div className="section-label">Contact</div>
-        <h2 className="section-title">Let's Build Something<br /><span>Remarkable.</span></h2>
-        <p className="section-sub">Have a workflow to automate, a process to eliminate, or an AI idea to bring to life? I'm ready to make it happen.</p>
+        <div className="section-label">Audit & Contact</div>
+        <h2 className="section-title">Ready to reclaim your<br /><span>team's time?</span></h2>
+        <p className="section-sub">Book a free 15-minute Automation Audit. I'll analyze your biggest time-waster and sketch a solution. No pitch, no obligation.</p>
 
-        <div className="contact-grid">
+        <div className="contact-grid" style={{ marginTop: '50px' }}>
           
-          {/* LEFT: Contact Info */}
+          {/* LEFT: Trust Signals & Calendly */}
           <div className="contact-info">
-            <div className="availability-card">
-              <div className="avail-header">
-                <div className="avail-dot"></div>
-                <div className="avail-title">Currently Available for New Projects</div>
+            <div className="trust-signals">
+              <div className="trust-item">
+                <span className="trust-icon">⚡</span> 15-min call, not a 60-min sales pitch
               </div>
-              <div className="avail-desc">Taking on freelance automation projects. Typical delivery in 48–72 hours from scoping to production.</div>
-            </div>
-
-            <div className="info-item">
-              <div className="info-icon">📧</div>
-              <div className="info-text">
-                <div className="info-label">Email</div>
-                <div className="info-value"><a href="mailto:abdullahdilshad111@gmail.com">abdullahdilshad111@gmail.com</a></div>
+              <div className="trust-item">
+                <span className="trust-icon">🔒</span> No spam, unsubscribe anytime
               </div>
-            </div>
-
-            <div className="info-item">
-              <div className="info-icon">📱</div>
-              <div className="info-text">
-                <div className="info-label">WhatsApp / Phone</div>
-                <div className="info-value"><a href="tel:+923106442188">+92 310 644 2188</a></div>
+              <div className="trust-item">
+                <span className="trust-icon">⭐</span> 5/5 from 12+ clients
+              </div>
+              <div className="trust-item">
+                <span className="trust-icon">📩</span> Average response time: &lt; 2 hours
               </div>
             </div>
 
-            <div className="info-item">
-              <div className="info-icon">📍</div>
-              <div className="info-text">
-                <div className="info-label">Location</div>
-                <div className="info-value">Islamabad, Pakistan · Remote Worldwide</div>
-              </div>
+            <div className="email-copy-block">
+              <div className="ec-label">Direct Email</div>
+              <button className={`btn-copy-email ${emailCopied ? 'copied' : ''}`} onClick={copyEmail}>
+                abdullahdilshad111@gmail.com
+                <span className="copy-icon">
+                  {emailCopied ? '✓' : '❐'}
+                </span>
+              </button>
             </div>
 
-            <div className="info-item">
-              <div className="info-icon">⏰</div>
-              <div className="info-text">
-                <div className="info-label">Response Time</div>
-                <div className="info-value">Usually within a few hours</div>
-              </div>
-            </div>
-
-            <div className="social-row">
-              <a className="social-btn" href="https://linkedin.com/in/abdullah-dilshad" target="_blank" rel="noreferrer">
-                <span className="social-icon">💼</span> LinkedIn
-              </a>
-              <a className="social-btn" href="https://n8n.io/creators/abdullahmil" target="_blank" rel="noreferrer">
-                <span className="social-icon">⬡</span> n8n Profile
-              </a>
-              <a className="social-btn" href="https://x.com/AbdullahDilsha7" target="_blank" rel="noreferrer">
-                <span className="social-icon">𝕏</span> Twitter/X
-              </a>
+            <div className="calendly-wrapper">
+              <div className="calendly-label">Pick a time to talk directly:</div>
+              <iframe 
+                src="https://calendly.com/abdullahdilshad111/15-minute-automation-audit" 
+                width="100%" 
+                height="400" 
+                frameBorder="0" 
+                title="Calendly Scheduling"
+                className="calendly-iframe"
+              ></iframe>
             </div>
           </div>
 
@@ -147,8 +137,8 @@ const Contact = () => {
           <div className="contact-form-wrap">
             {formState !== 'success' && (
               <>
-                <div className="form-title">Send a Message</div>
-                <div className="form-sub">Fill in the details and I'll get back to you within hours.</div>
+                <div className="form-title">Request an Audit Offline</div>
+                <div className="form-sub">Can't find a time on Calendly? Fill this out and I'll send you an async audit.</div>
 
                 <div id="contact-form">
                   <div className="form-row">
@@ -163,16 +153,20 @@ const Contact = () => {
                   </div>
 
                   <div className="form-group">
-                    <label className="form-label">What do you need automated?</label>
-                    <select className="form-select" id="f-type" value={formData.type} onChange={handleInputChange}>
-                      <option value="" disabled>Select a project type...</option>
-                      <option value="Lead Generation & Outreach">Lead Generation & Outreach</option>
-                      <option value="AI Customer Support Agent">AI Customer Support Agent</option>
-                      <option value="Email / Inbox Automation">Email / Inbox Automation</option>
-                      <option value="CRM & Data Pipeline">CRM & Data Pipeline</option>
-                      <option value="API Integration">API Integration</option>
-                      <option value="Custom n8n Workflow">Custom n8n Workflow</option>
-                      <option value="Something else...">Something else...</option>
+                    <label className="form-label">Company Name</label>
+                    <input type="text" className="form-input" placeholder="Acme Corp" id="f-company" value={formData.company} onChange={handleInputChange} />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Biggest Time-Waster?</label>
+                    <select className="form-select" id="f-waster" value={formData.waster} onChange={handleInputChange}>
+                      <option value="" disabled>Select the biggest bottleneck...</option>
+                      <option value="Lead qualification & outreach">Lead qualification & outreach</option>
+                      <option value="Customer support & ticket routing">Customer support & ticket routing</option>
+                      <option value="Data entry across different apps">Data entry across different apps</option>
+                      <option value="Proposal or document generation">Proposal or document generation</option>
+                      <option value="Reporting & KPI tracking">Reporting & KPI tracking</option>
+                      <option value="Other">Other</option>
                     </select>
                   </div>
 
@@ -192,8 +186,8 @@ const Contact = () => {
                   </div>
 
                   <div className="form-group">
-                    <label className="form-label">Tell me about your project</label>
-                    <textarea className="form-textarea" placeholder="Describe the manual process you want to eliminate, what tools you currently use, and what a successful outcome looks like..." id="f-msg" value={formData.msg} onChange={handleInputChange}></textarea>
+                    <label className="form-label">Any specific notes?</label>
+                    <textarea className="form-textarea" placeholder="Describe the manual process in a bit more detail..." id="f-msg" value={formData.msg} onChange={handleInputChange}></textarea>
                   </div>
 
                   <button 
@@ -203,20 +197,14 @@ const Contact = () => {
                   onClick={handleSubmit}
                 >
                   <span className="btn-text">
-                    {formState === 'idle' && 'Send Message'}
-                    {formState === 'submitting' && 'Sending...'}
-                    {formState === 'success' && 'Message Sent!'}
+                    {formState === 'idle' && 'Book My Audit'}
+                    {formState === 'submitting' && 'Booking...'}
                     {formState === 'error' && 'Error - Try Again'}
                   </span>
                   {formState === 'idle' && (
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="22" y1="2" x2="11" y2="13"></line>
                       <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                    </svg>
-                  )}
-                  {formState === 'success' && (
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
                     </svg>
                   )}
                 </button>
@@ -228,8 +216,8 @@ const Contact = () => {
             {formState === 'success' && (
               <div className="form-success" style={{ display: 'block' }}>
                 <div className="success-icon">✅</div>
-                <div className="success-title">Message Sent!</div>
-                <div className="success-sub">Thanks for reaching out. I'll review your project details and get back to you within a few hours.</div>
+                <div className="success-title">You're booked!</div>
+                <div className="success-sub">Check your email for the confirmation. I'll reach out shortly to prepare for the audit.</div>
               </div>
             )}
           </div>

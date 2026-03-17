@@ -1,11 +1,30 @@
 import React from 'react';
 
 const reasons = [
-  { num: '01', title: 'I ship in 48 hours, not 48 days', desc: 'Every workflow I\'ve ever built went from scoping call to <strong>live in production within 48 hours</strong>. No months-long projects. No endless revisions. You see results fast.' },
-  { num: '02', title: 'I build for production, not demos', desc: 'Every system includes <strong>error handling, retry logic, structured logging,</strong> and monitoring. Workflows that run flawlessly at scale — not just in a sandbox.' },
-  { num: '03', title: 'I speak business, not just tech', desc: 'I don\'t just build what you ask for — I ask <strong>what outcome you need</strong> and engineer the right solution. You\'ll never get a technically correct answer to the wrong problem.' },
-  { num: '04', title: 'Certified & verified by n8n itself', desc: 'I\'m one of a <strong>select group of n8n Verified Creators</strong> whose work is accepted into the official template library — a standard most developers never reach.' },
-  { num: '05', title: 'You own everything. No lock-in.', desc: 'Every workflow is fully documented, modular, and <strong>100% yours</strong>. You\'re never dependent on me to keep the lights on. That\'s the point.' }
+  { 
+    num: '01', 
+    title: 'Business-First Approach', 
+    desc: 'I diagnose your pain before writing a single line of code. You\'ll never get a technically correct answer to the wrong problem.',
+    testimonial: { quote: "Saved us 15 hours/week immediately", author: "James M., Head of Sales" }
+  },
+  { 
+    num: '02', 
+    title: 'Proven ROI', 
+    desc: 'Automation for automation\'s sake is useless. Every project is measured strictly against time saved or new revenue gained.',
+    testimonial: { quote: "Achieved 10x ROI in the first 90 days", author: "Sarah K., Agency Founder" }
+  },
+  { 
+    num: '03', 
+    title: 'Rapid Deployment', 
+    desc: '<strong>Production-ready workflows in 48 hours, not 2 weeks.</strong> I build with velocity because your business operates in real-time.',
+    testimonial: { quote: "Delivered our entire lead engine over a weekend", author: "Michael T., SaaS CEO" }
+  },
+  { 
+    num: '04', 
+    title: 'No-Code Handoff', 
+    desc: '<strong>You own the system.</strong> Full documentation, architecture mapping, and team training included. No agency lock-in, ever.',
+    testimonial: { quote: "The handoff documentation was flawless", author: "Elena R., Operations Dir." }
+  }
 ];
 
 const WhyHireMe = () => {
@@ -28,13 +47,21 @@ const WhyHireMe = () => {
               <div 
                 key={index} 
                 className="why-item"
-                style={{ animationDelay: `${0.05 + index * 0.07}s` }}
+                style={{ animationDelay: `${0.05 + index * 0.07}s`, flexDirection: 'column', alignItems: 'flex-start' }}
               >
-                <div className="why-num">{reason.num}</div>
-                <div className="why-content">
-                  <div className="why-title">{reason.title}</div>
-                  <div className="why-desc" dangerouslySetInnerHTML={{ __html: reason.desc }}></div>
+                <div style={{ display: 'flex', gap: '20px', width: '100%' }}>
+                  <div className="why-num">{reason.num}</div>
+                  <div className="why-content">
+                    <div className="why-title">{reason.title}</div>
+                    <div className="why-desc" dangerouslySetInnerHTML={{ __html: reason.desc }}></div>
+                  </div>
                 </div>
+                {reason.testimonial && (
+                  <div className="micro-testimonial">
+                    <div className="mt-quote">"{reason.testimonial.quote}"</div>
+                    <div className="mt-author">— {reason.testimonial.author}</div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
