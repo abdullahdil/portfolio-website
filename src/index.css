@@ -2164,7 +2164,7 @@ footer {
     text-align: center;
   }
   .hero-left { padding-right: 0; }
-  .hero-right { margin-bottom: 20px; }
+  .hero-right { margin-bottom: 20px; width: 100%; display: flex; justify-content: center; }
   .hero-actions { justify-content: center; }
   .hero-stats { justify-content: center; }
   .hero-badge { align-self: center; }
