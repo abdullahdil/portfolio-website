@@ -2169,7 +2169,14 @@ footer {
   .hero-stats { justify-content: center; }
   .hero-badge { align-self: center; }
 
-  .profile-container { width: 320px; height: 320px; }
+  .profile-container {
+  width: 360px;
+  height: 360px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
   .profile-circle { width: 260px; height: 260px; }
   .profile-ring-outer { width: 300px; height: 300px; }
   .profile-ring-inner { width: 280px; height: 280px; }
